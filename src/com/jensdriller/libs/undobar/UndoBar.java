@@ -1,7 +1,7 @@
 package com.jensdriller.libs.undobar;
 
-import static com.nineoldandroids.view.ViewHelper.setAlpha;
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -9,10 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import android.view.ViewPropertyAnimator;
 
 public final class UndoBar {
 
@@ -73,7 +70,7 @@ public final class UndoBar {
 		mActivity = activity;
 		mView = getView(activity);
 		mView.setOnUndoClickListener(mOnUndoClickListener);
-		mViewAnimator = animate(mView);
+		mViewAnimator = mView.animate();
 
 		hide(false);
 	}
@@ -152,7 +149,7 @@ public final class UndoBar {
 		if (shouldAnimate) {
 			animateIn();
 		} else {
-			setAlpha(mView, 1);
+			mView.setAlpha(1f);
 		}
 	}
 
@@ -175,7 +172,7 @@ public final class UndoBar {
 		if (shouldAnimate) {
 			animateOut();
 		} else {
-			setAlpha(mView, 0);
+			mView.setAlpha(0f);
 			mView.setVisibility(View.GONE);
 			mUndoMessage = null;
 			mUndoToken = null;
